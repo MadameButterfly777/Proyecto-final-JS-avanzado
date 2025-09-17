@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cuentos para No Dormir</title>
+  <!-- Bulma solamente -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+  <!-- Link de Mockapi -->
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar is-danger has-shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item has-text-weight-bold">Comi‑25</a>
+    </div>
+    <div id="navMenu" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item">Demo Trabajo Integrador, tercer modulo</a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-white">GitHub</a>
+            <button class="button is-primary is-light">+ Agregar Libro</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO -->
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-3">📖 Cuentos para No Dormir</h1>
+
+      <!-- FILTROS -->
+      <div class="box">
+        <div class="columns is-variable is-2 is-multiline" role="search">
+          <div class="column is-12-tablet is-4-desktop">
+            <label class="label">Buscar por titulo o autor</label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Ej: 'El gato negro', Edgar Allan Poe">
+            </div>
+          </div>
+          <div class="column is-6-tablet is-3-desktop">
+            <label class="label">Genero</label>
+            <div class="select is-fullwidth">
+              <select>
+                <option value="">Todos</option>
+                <option value="Gótico">🕯️ Gótico</option>
+                <option value="Psicológico">🧠 Psicológico</option>
+                <option value="Paranormal">👻 Paranormal</option>
+                <option value="Criaturas nocturnas">🧛 Criaturas nocturnas</option>
+              </select>
+            </div>
+          </div>
+          <div class="column is-6-tablet is-3-desktop">
+            <label class="label">Estado de lectura</label>
+            <div class="select is-fullwidth">
+              <select>
+                <option>Todas</option>
+                <option>Leido</option>
+                <option>Pendiente</option>
+                <option>Leyendo</option>
+              </select>
+            </div>
+          </div>
+          <div class="column is-6-tablet is-2-desktop">
+            <label class="label">Orden</label>
+            <div class="select is-fullwidth">
+              <select>
+                <option>Nombre A→Z</option>
+                <option>Nombre Z→A</option>
+                <option>Nuevos primero</option>
+              </select>
+            </div>
+          </div>
+          <div class="column is-6-tablet is-12-desktop has-text-right">
+            <label class="label is-invisible">Acciones</label>
+            <div class="buttons is-right">
+              <button class="button is-light">🧹 Limpiar filtros</button>
+              <button class="button is-info is-light">↻ Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     <!-- LISTADO -->
+<div id="list" class="columns is-multiline">
+  
+</div> 
+<!-- ESTADO: SIN RESULTADOS (va a estar oculto por defecto) -->
+<div id="empty" class="has-text-centered is-hidden">
+  <p class="title is-5">Sin resultados</p>
+  <p class="subtitle is-6">Ajustá los filtros o agregá un cuento.</p>
+</div>
+
+<!-- ESTADO: LOADER (va a estar oculto por defecto) -->
+<div id="loader" class="has-text-centered is-hidden">
+  <button class="button is-loading is-white">Cargando…</button>
+</div>    </div>
+  </section>
+
+  <!-- MODAL DE MUESTRA (abierto DE PRUEBA para visualizar sin JS) -->
+  <div class="modal ">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title ">Agregar/Editar Estudiante</p>
+        <!-- el botón no puede cerrar sin JS!!!! -->
+        <button class="delete" aria-label="close" title="Cierre visual"></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">Nombre</label>
+          <div class="control"><input class="input" placeholder="Ej: Ana Pérez"></div>
+        </div>
+        <div class="field">
+          <label class="label">Carrera</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                <option>Frontend</option><option>Backend</option>
+                <option>UX/UI</option><option>QA Testing</option><option>Data</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Seniority</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              <select>
+                <option>trainee</option><option>junior</option>
+                <option>semi‑senior</option><option>senior</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Avatar URL</label>
+          <div class="control"><input class="input" placeholder="https://i.pravatar.cc/100?img=3"></div>
+        </div>
+        <div class="field">
+          <label class="label">Ciudad</label>
+          <div class="control"><input class="input" placeholder="Ej: Buenos Aires"></div>
+        </div>
+        <div class="field">
+          <label class="label">Bio</label>
+          <div class="control"><textarea class="textarea" rows="3" placeholder="Pequeña descripción…"></textarea></div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary">Guardar</button>
+        <button class="button">Cancelar</button>
+      </footer>
+    </div>
+  </div>
+  <!-- Para ocultar el modal en la demo, quitá la clase `is-active` arriba -->
+ <script src="prueba.js"></script>
+</body>
+</html>
