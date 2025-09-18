@@ -23,7 +23,8 @@
         <div class="navbar-item">
           <div class="buttons">
             <a class="button is-white">GitHub</a>
-            <button class="button is-primary is-light">+ Agregar Libro</button>
+            <!--boton en nav bar -->
+            <button id="btn-add" class="button is-primary is-light">+ Agregar Libro</button>
           </div>
         </div>
       </div>
@@ -103,67 +104,71 @@
 </div>    </div>
   </section>
 
-  <!-- MODAL DE MUESTRA (abierto DE PRUEBA para visualizar sin JS) -->
-  <div class="modal ">
+  <!-- MODAL  -->
+  <div id="modal" class="modal ">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title ">Agregar/Editar Libro</p>
-        <!-- el botón no puede cerrar sin JS!!!! -->
         <button class="delete" aria-label="close" title="Cierre visual"></button>
       </header>
+      <!-- ACA termina el header! -->
+
       <section class="modal-card-body">
-        <div class="field">
-          <label class="label">Nombre del Libro</label>
-          <div class="control"><input class="input" placeholder="Ej: La caida de la mansion Usher"></div>
-        </div>
-        <div class="field">
-          <label class="label">Genero</label>
-          <div class="control">
-            <div class="select is-fullwidth">
-              <select>
-                <option>Todos</option>
-                <option>🕯️ Gótico</option>
-                <option>🧠 Psicológico</option>
-                <option>👻 Paranormal</option>
-                <option>🧛 Criaturas nocturnas</option>
-              </select>
-                     </div>
+         <!-- Form sencillo para crear/editar -->
+      <div class="field">
+        <label class="label">Título</label>
+        <div class="control"><input id="f-title" class="input" placeholder="Ej: La caída de la casa Usher"></div>
+      </div>
+
+      <div class="field">
+        <label class="label">Autor</label>
+        <div class="control"><input id="f-author" class="input" placeholder="Ej: Edgar Allan Poe"></div>
+      </div>
+
+      <div class="field">
+        <label class="label">Género</label>
+        <div class="control">
+          <div class="select is-fullwidth">
+            <select id="f-genre">
+              <option value="gótico">🕯️ Gótico</option>
+              <option value="psicológico">🧠 Psicológico</option>
+              <option value="paranormal">👻 Paranormal</option>
+              <option value="criaturas nocturnas">🧛 Criaturas nocturnas</option>
+            </select>
           </div>
         </div>
-        <div class="field">
-          <label class="label">Estado de lectura</label>
-          <div class="control">
-            <div class="select is-fullwidth">
-              <select>
-                 <option>Todas</option>
-                <option>Leido</option>
-                <option>Pendiente</option>
-                <option>Leyendo</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">Avatar URL</label>
-          <div class="control"><input class="input" placeholder="https://i.pravatar.cc/100?img=3"></div>
-        </div>
-        <div class="field">
-          <label class="label">Ciudad</label>
-          <div class="control"><input class="input" placeholder="Ej: Buenos Aires"></div>
-        </div>
-        <div class="field">
-          <label class="label">Bio</label>
-          <div class="control"><textarea class="textarea" rows="3" placeholder="Pequeña descripción…"></textarea></div>
-        </div>
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-primary">Guardar</button>
-        <button class="button">Cancelar</button>
-      </footer>
+      </div>
+
+      <div class="field">
+        <label class="label">Portada (URL)</label>
+        <div class="control"><input id="f-cover" class="input" placeholder="https://..."></div>
+      </div>
+
+      <div class="field">
+        <label class="label">Descripción</label>
+        <div class="control"><textarea id="f-desc" class="textarea" rows="3" placeholder="Pequeña descripción…"></textarea></div>
+      </div>
+
+      <label class="checkbox"><input id="f-available" type="checkbox"> Disponible</label>
+    </section>
+
+    <footer class="modal-card-foot">
+      <button id="modal-save" class="button is-primary">Guardar</button>
+      <button id="modal-cancel" class="button">Cancelar</button>
+    </footer>
+  </div>
+</div>
     </div>
   </div>
-  <!-- Para ocultar el modal en la demo, quitá la clase `is-active` arriba -->
+<footer class="footer  has-background-danger has-text-white">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Cuentos para No Dormir</strong> — Hecho con 🕯️ por Shorshii.
+      <br>Datos servidos por MockAPI • UI con Bulma
+    </p>
+  </div>
+</footer>
  <script src="main.js"></script>
 </body>
 </html>

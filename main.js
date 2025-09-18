@@ -82,7 +82,7 @@ const renderList = (books = []) => {
 };
 fetchAllFilters = async () => {
     const genreSet = new Set();
-    const 
+   
 }
 
 fetchAllFilters()
