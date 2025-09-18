@@ -47,7 +47,7 @@
           <div class="column is-6-tablet is-3-desktop">
             <label class="label">Genero</label>
             <div class="select is-fullwidth">
-              <select>
+              <select id="genre">
                 <option value="">Todos</option>
                 <option value="Gótico">🕯️ Gótico</option>
                 <option value="Psicológico">🧠 Psicológico</option>
@@ -108,33 +108,38 @@
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title ">Agregar/Editar Estudiante</p>
+        <p class="modal-card-title ">Agregar/Editar Libro</p>
         <!-- el botón no puede cerrar sin JS!!!! -->
         <button class="delete" aria-label="close" title="Cierre visual"></button>
       </header>
       <section class="modal-card-body">
         <div class="field">
-          <label class="label">Nombre</label>
-          <div class="control"><input class="input" placeholder="Ej: Ana Pérez"></div>
+          <label class="label">Nombre del Libro</label>
+          <div class="control"><input class="input" placeholder="Ej: La caida de la mansion Usher"></div>
         </div>
         <div class="field">
-          <label class="label">Carrera</label>
+          <label class="label">Genero</label>
           <div class="control">
             <div class="select is-fullwidth">
               <select>
-                <option>Frontend</option><option>Backend</option>
-                <option>UX/UI</option><option>QA Testing</option><option>Data</option>
+                <option>Todos</option>
+                <option>🕯️ Gótico</option>
+                <option>🧠 Psicológico</option>
+                <option>👻 Paranormal</option>
+                <option>🧛 Criaturas nocturnas</option>
               </select>
-            </div>
+                     </div>
           </div>
         </div>
         <div class="field">
-          <label class="label">Seniority</label>
+          <label class="label">Estado de lectura</label>
           <div class="control">
             <div class="select is-fullwidth">
               <select>
-                <option>trainee</option><option>junior</option>
-                <option>semi‑senior</option><option>senior</option>
+                 <option>Todas</option>
+                <option>Leido</option>
+                <option>Pendiente</option>
+                <option>Leyendo</option>
               </select>
             </div>
           </div>
