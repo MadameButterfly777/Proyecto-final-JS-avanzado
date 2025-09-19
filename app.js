@@ -24,12 +24,13 @@ function getLibros () {
     })
 }
 
-getLibros()
+
 
 
 function showLibros (libros) {
+    containerList.innerHTML = '';
  libros.forEach(book => {
-    const {cover, title, author, genre, status, description} = book
+    const {cover, title, author, genre, status, description, id} = book
     const column = document.createElement('div');
     column.className = "column is-one-quarter"
     column.innerHTML = `<div class="card">
@@ -51,8 +52,8 @@ function showLibros (libros) {
           </div>
           <div class="content">${description || 'Sin descripción'}</div>
           <div class="buttons">
-            <button class="button is-small is-warning is-light" data-id="${book.id}" data-action="edit">✏️ Editar</button>
-            <button class="button is-small is-danger" data-id="${book.id}" data-action="delete">🗑️ Eliminar</button>
+            <button class="button is-small is-warning is-light" data-id="${id}" data-action="edit">✏️ Editar</button>
+            <button class="button is-small is-danger" onclick="deleteBook('${id}')" data-id="${id}" data-action="delete">🗑️ Eliminar</button>
           </div>
         </div>
       </div>
@@ -60,6 +61,24 @@ function showLibros (libros) {
      containerList.appendChild(column);
  });
 }
+// la D del CRUD
+ window.deleteBook = async function deleteBook(id) {
+   fetch(`${API_URL}/list/${id}`, {method: 'DELETE'})
+    .then(response => {
+        if (!response.ok) throw new Error (`Error HHTP: ${response.status}`);
+         alert('Libro eliminado correctamente')
+         getLibros()
+    })
+        return response.json()
+       
+    .catch(err => {
+    console.error("Error al el libro:", err);
+    alert(`⚠️ Error al el libro: ${err.message}`);
+    });
+}
+deleteBook()
+
+
 // la  U del CRUD
 function editBook () {
     fetch(`${API_URL}/list/:id`)
@@ -75,5 +94,5 @@ function newBook(update_book) {
     .then((resp) => resp.json())
     .then((datos) => console.log("datos:" , datos))
 }
-
+getLibros()
 newBook(update_book)
