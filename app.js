@@ -1,6 +1,6 @@
 const API_URL = "https://68b700a673b3ec66cec374d2.mockapi.io";
 
-//la R del Crud :P
+//la R del CRUD :P
 const containerList = document.getElementById("list")
 function getLibros () {
     fetch(`${API_URL}/list`)
@@ -60,3 +60,20 @@ function showLibros (libros) {
      containerList.appendChild(column);
  });
 }
+// la  U del CRUD
+function editBook () {
+    fetch(`${API_URL}/list/:id`)
+}
+
+//la C del CRUD
+function newBook(update_book) {
+    fetch(`${API_URL}/list/` , {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(update_book)
+    })
+    .then((resp) => resp.json())
+    .then((datos) => console.log("datos:" , datos))
+}
+
+newBook(update_book)
