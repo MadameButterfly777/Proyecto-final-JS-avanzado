@@ -57,7 +57,7 @@
               </select>
             </div>
           </div>
-          <div class="column is-6-tablet is-3-desktop">
+          <div id="status" class="column is-6-tablet is-3-desktop">
             <label class="label">Estado de lectura</label>
             <div class="select is-fullwidth">
               <select>
@@ -71,7 +71,7 @@
           <div class="column is-6-tablet is-2-desktop">
             <label class="label">Orden</label>
             <div class="select is-fullwidth">
-              <select>
+              <select id="author">
                 <option>Nombre A→Z</option>
                 <option>Nombre Z→A</option>
                 <option>Nuevos primero</option>
@@ -88,7 +88,7 @@
         </div>
       </div>
 
-     <!-- LISTADO -->
+     <!-- LISTADO  -->
 <div id="list" class="columns is-multiline">
   
 </div> 
@@ -110,7 +110,7 @@
     <div class="modal-card">
       <header class="modal-card-head">
         <p class="modal-card-title ">Agregar/Editar Libro</p>
-        <button class="delete" aria-label="close" title="Cierre visual"></button>
+        <button id="modal-close" class="delete" aria-label="close" title="Cierre visual"></button>
       </header>
       <!-- ACA termina el header! -->
 
@@ -161,7 +161,7 @@
 </div>
     </div>
   </div>
-<footer class="footer  has-background-danger has-text-white">
+<footer class="footer  has-background-black has-text-white-ter">
   <div class="content has-text-centered">
     <p>
       <strong>Cuentos para No Dormir</strong> — Hecho con 🕯️ por Shorshii.
@@ -169,6 +169,7 @@
     </p>
   </div>
 </footer>
- <script src="main.js"></script>
+ <!-- <script src="main.js"></script> -->
+ <script src="app.js"></script>
 </body>
 </html>

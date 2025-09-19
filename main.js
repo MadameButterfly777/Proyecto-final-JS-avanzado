@@ -1,5 +1,4 @@
 const API_URL = "https://68b700a673b3ec66cec374d2.mockapi.io/list";
-
 const $ = (e) => document.querySelector(e);
 const bookList  = $('#list');
  const bookGenre = $('#genre'); 
@@ -80,10 +79,55 @@ const renderList = (books = []) => {
     bookList.appendChild(column);
   });
 };
-fetchAllFilters = async () => {
-    const genreSet = new Set();
-   
-}
 
-fetchAllFilters()
+const createBook = async (bookData) => {
+  try {
+    const res = await fetch("https://68b700a673b3ec66cec374d2.mockapi.io/list", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(bookData)
+    });
+
+    if (!res.ok) throw new Error("Error al crear el libro");
+
+    const newBook = await res.json();
+    console.log("Libro creado:", newBook);
+    fetchBooks(); 
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    alert("Ocurrió un error al guardar el libro.");
+  }
+};
+
+const modal = document.getElementById("modal");
+const saveBtn = document.getElementById("modal-save");
+
+saveBtn.addEventListener("click", () => {
+  const book = {
+    title: document.getElementById("f-title").value.trim(),
+    author: document.getElementById("f-author").value.trim(),
+    genre: document.getElementById("f-genre").value,
+    cover: document.getElementById("f-cover").value.trim(),
+    description: document.getElementById("f-desc").value.trim(),
+    status: document.getElementById("f-available").checked ? "disponible" : "pendiente"
+  };
+//aca se cierra el modal
+  createBook(book);
+  document.getElementById('modal-close').addEventListener('click' , () => {
+      modal.classList.add('is-active');
+  })
+   
+});
+document.getElementById('btn-add').addEventListener('click', () => {
+  modal.classList.add('is-active');
+});
+document.getElementById('modal-cancel').addEventListener('click', () => {
+  modal.classList.remove('is-active');
+});
+
+
+
+
 fetchBooks();
