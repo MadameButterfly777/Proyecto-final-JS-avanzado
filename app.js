@@ -75,8 +75,11 @@ function showLibros (libros) {
     console.error("Error al el libro:", err);
     alert(`⚠️ Error al el libro: ${err.message}`);
     });
+    
 }
+
 deleteBook()
+
 
 
 // la  U del CRUD
