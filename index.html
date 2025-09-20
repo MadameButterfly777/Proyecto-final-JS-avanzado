@@ -41,7 +41,7 @@
         <div class="columns is-variable is-2 is-multiline" role="search">
           <div class="column is-12-tablet is-4-desktop">
             <label class="label">Buscar por titulo o autor</label>
-            <div class="control">
+            <div id="filters" class="control">
               <input class="input" type="text" placeholder="Ej: 'El gato negro', Edgar Allan Poe">
             </div>
           </div>
@@ -66,16 +66,6 @@
                     <option value="pendiente">Pendiente</option>
                     <option value="leyendo">Leyendo</option>
                     </select>
-            </div>
-          </div>
-          <div class="column is-6-tablet is-2-desktop">
-            <label class="label">Orden</label>
-            <div class="select is-fullwidth">
-              <select id="order">
-                <option>Nombre A→Z</option>
-                <option>Nombre Z→A</option>
-                <option>Nuevos primero</option>
-              </select>
             </div>
           </div>
           <div class="column is-6-tablet is-12-desktop has-text-right">

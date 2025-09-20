@@ -148,7 +148,7 @@ btnSave?.addEventListener('click', async () => {
     btnSave.disabled = false;
   }
 });
-
+ 
 
 function editBook(id, data) {
   return fetch(`${API_URL}/list/${id}`, {
@@ -158,5 +158,11 @@ function editBook(id, data) {
   }).then(r => r.json());
 }
 
+const $ = e => document.getElementById(e);
+
+const bookList = $("list");
+const FiltersContainer = $("filters");
+const genreSelect = $("genre")
+const statusSelect = $("status")
 
 getLibros();
