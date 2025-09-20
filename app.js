@@ -68,6 +68,7 @@ window.deleteBook = async function deleteBook(id) {
     console.error("Error al borrar el libro:", err);
     alert(`⚠️ No pude borrar el libro: ${err.message}`);
   }
+  
 };
 
 
