@@ -25,7 +25,7 @@ function showLibros(libros = []) {
   containerList.innerHTML = "";
     if (!libros.length) {
     // Mensaje si no hay resultados
-    containerList.innerHTML = '<div class="notification is-warning">No se encontraron personajes.</div>';
+    containerList.innerHTML = '<div class="notification is-danger">No se encontraron libros.</div>';
     return;
   }
   libros.forEach((libro) => {
