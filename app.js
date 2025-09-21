@@ -23,6 +23,11 @@ async function getLibros() {
 
 function showLibros(libros = []) {
   containerList.innerHTML = "";
+    if (!libros.length) {
+    // Mensaje si no hay resultados
+    containerList.innerHTML = '<div class="notification is-warning">No se encontraron personajes.</div>';
+    return;
+  }
   libros.forEach((libro) => {
     const { cover, title, author, genre, status, description, id } = libro;
 
@@ -47,9 +52,10 @@ function showLibros(libros = []) {
             </div>
           </div>
           <div class="content">${description || 'Sin descripción'}</div>
-          <div class="buttons">
+          <div class="buttons" class="notification">
             <button class="button is-small is-warning is-light" data-id="${id}" data-action="edit">✏️ Editar</button>
-            <button class="button is-small is-danger" onclick="deleteBook('${id}')">🗑️ Eliminar</button>
+            <button class="button is-small is-danger" 
+           class="delete" onclick="deleteBook('${id}')">🗑️ Eliminar</button>
           </div>
         </div>
       </div>`;
@@ -58,6 +64,7 @@ function showLibros(libros = []) {
 }
 
 // D del CRUD
+
 window.deleteBook = async function (id) {
   
   if (!confirm(`¿Estás segura/o de eliminar el libro con ID ${id}?`)) return;
@@ -67,7 +74,7 @@ window.deleteBook = async function (id) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
     alert('Libro eliminado correctamente');
-    await getLibros(); // refresca la vista
+    await getLibros(); 
   } catch (err) {
     console.error('Error al borrar el libro:', err);
     alert(`⚠️ No pude borrar el libro: ${err.message}`);
@@ -88,7 +95,7 @@ const closeModal = () => modal.classList.remove('is-active');
 
 
 btnAdd?.addEventListener('click', () => {
-  // modo crear (por si después usás el mismo modal para editar)
+
   modal.dataset.mode = 'create';
  
   clearForm();
@@ -160,16 +167,16 @@ function editBook(id, data) {
   }).then(r => r.json());
 }
 
-// === Filtros (funciona con tu HTML actual) ===
+// === Filtros  ===
 const $ = (id) => document.getElementById(id);
 
 const bookList     = $("list");
 const genreSelect  = $("genre");
 const statusSelect = $("status");
-// ojo: acá apuntamos al input dentro del div#filters
+
 const searchInput  = document.querySelector("#filters input");
 
-let allBooks = []; // cache local
+let allBooks = []; 
 
 async function cargarLibrosParaFiltrar() {
   const res = await fetch("https://68b700a673b3ec66cec374d2.mockapi.io/list");
@@ -196,23 +203,17 @@ function aplicarFiltros() {
     return okTexto && okGenero && okEstado;
   });
 
-  // Reutilizo tu showLibros (render)
   showLibros(filtrados);
 }
 
-// listeners correctos
+
 searchInput?.addEventListener("input", aplicarFiltros);
 genreSelect?.addEventListener("change", aplicarFiltros);
 statusSelect?.addEventListener("change", aplicarFiltros);
 
-// Si ya llamás a getLibros() en otro lado para pintar, podés:
-// 1) Quitar esa llamada y usar sólo este:
+
 cargarLibrosParaFiltrar();
 
-// 2) O si preferís mantener getLibros(), podés asignar allBooks ahí:
-// after fetch en tu getLibros:
-//   allBooks = libros;
-//   aplicarFiltros(); // en vez de showLibros(libros);
 
 
 getLibros();
