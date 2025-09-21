@@ -23,8 +23,8 @@ async function getLibros() {
 
 function showLibros(libros = []) {
   containerList.innerHTML = "";
-  libros.forEach((book) => {
-    const { cover, title, author, genre, status, description, id } = book;
+  libros.forEach((libro) => {
+    const { cover, title, author, genre, status, description, id } = libro;
 
     const column = document.createElement("div");
     column.className = "column is-one-quarter";
@@ -58,19 +58,21 @@ function showLibros(libros = []) {
 }
 
 // D del CRUD
-window.deleteBook = async function deleteBook(id) {
+window.deleteBook = async function (id) {
+  
+  if (!confirm(`¿Estás segura/o de eliminar el libro con ID ${id}?`)) return;
+
   try {
-    const res = await fetch(`${API_URL}/list/${id}`, { method: "DELETE" });
+    const res = await fetch(`${API_URL}/list/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    alert("Libro eliminado correctamente");
-    await getLibros(); 
+
+    alert('Libro eliminado correctamente');
+    await getLibros(); // refresca la vista
   } catch (err) {
-    console.error("Error al borrar el libro:", err);
+    console.error('Error al borrar el libro:', err);
     alert(`⚠️ No pude borrar el libro: ${err.message}`);
   }
-  
 };
-
 
 // === Modal  y C del CRUD
 
@@ -110,16 +112,16 @@ function clearForm() {
 
 async function createBookFromModal() {
   
-  const book = {
+  const libro = {
     title: document.getElementById('f-title').value.trim(),
     author: document.getElementById('f-author').value.trim(),
     genre: document.getElementById('f-genre').value,
     cover: document.getElementById('f-cover').value.trim(),
     description: document.getElementById('f-desc').value.trim(),
-    status: document.getElementById('f-available').checked ? 'disponible' : 'pendiente'
+    status: document.getElementById('f-available').checked ? 'leido' : 'pendiente'
   };
 
-  if (!book.title) {
+  if (!libro.title) {
     alert('Poné al menos el título 🙂');
     return;
   }
@@ -128,7 +130,7 @@ async function createBookFromModal() {
   const res = await fetch(`${API_URL}/list`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(book)
+    body: JSON.stringify(libro)
   });
 
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -158,11 +160,59 @@ function editBook(id, data) {
   }).then(r => r.json());
 }
 
-const $ = e => document.getElementById(e);
+// === Filtros (funciona con tu HTML actual) ===
+const $ = (id) => document.getElementById(id);
 
-const bookList = $("list");
-const FiltersContainer = $("filters");
-const genreSelect = $("genre")
-const statusSelect = $("status")
+const bookList     = $("list");
+const genreSelect  = $("genre");
+const statusSelect = $("status");
+// ojo: acá apuntamos al input dentro del div#filters
+const searchInput  = document.querySelector("#filters input");
+
+let allBooks = []; // cache local
+
+async function cargarLibrosParaFiltrar() {
+  const res = await fetch("https://68b700a673b3ec66cec374d2.mockapi.io/list");
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  allBooks = await res.json();
+  aplicarFiltros();
+}
+
+function aplicarFiltros() {
+  const text   = (searchInput?.value || "").trim().toLowerCase();
+  const genre  = (genreSelect?.value || "").toLowerCase();
+  const status = (statusSelect?.value || "").toLowerCase();
+
+  const filtrados = allBooks.filter(b => {
+    const t = (b.title  || "").toLowerCase();
+    const a = (b.author || "").toLowerCase();
+    const g = (b.genre  || "").toLowerCase();
+    const s = (b.status || "").toLowerCase();
+
+    const okTexto  = !text   || t.includes(text) || a.includes(text);
+    const okGenero = !genre  || g === genre;
+    const okEstado = !status || s === status;
+
+    return okTexto && okGenero && okEstado;
+  });
+
+  // Reutilizo tu showLibros (render)
+  showLibros(filtrados);
+}
+
+// listeners correctos
+searchInput?.addEventListener("input", aplicarFiltros);
+genreSelect?.addEventListener("change", aplicarFiltros);
+statusSelect?.addEventListener("change", aplicarFiltros);
+
+// Si ya llamás a getLibros() en otro lado para pintar, podés:
+// 1) Quitar esa llamada y usar sólo este:
+cargarLibrosParaFiltrar();
+
+// 2) O si preferís mantener getLibros(), podés asignar allBooks ahí:
+// after fetch en tu getLibros:
+//   allBooks = libros;
+//   aplicarFiltros(); // en vez de showLibros(libros);
+
 
 getLibros();
