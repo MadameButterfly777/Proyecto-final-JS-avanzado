@@ -36,20 +36,20 @@ Etiquetas visuales distintivas para categorías
 🔗 API y endpoints
 La aplicación utiliza MockAPI como backend. Los endpoints utilizados son:
 
-Elementos: https://68c1c82e98c818a6940304d0.mockapi.io/api/ada/tp3/students
-Categorías: https://68c1c82e98c818a6940304d0.mockapi.io/api/ada/tp3/activities
+Elementos: https://68b700a673b3ec66cec374d2.mockapi.io/list
+
 📸 Capturas de pantalla
 Página de Inicio
-Página de Inicio
 
-Página de Inicio (Vista Alternativa)
-Página de Inicio Alternativa
+<img width="1894" height="799" alt="image" src="https://github.com/user-attachments/assets/99b624c5-2900-4fb8-8270-662e4015220d" />
+
+
+
 
 Pie de Página
-Pie de Página
+<img width="1873" height="210" alt="image" src="https://github.com/user-attachments/assets/bc481fcb-080d-4ce6-8981-8be91e329a3e" />
 
-Filtro Corregido
-Filtro Corregido
+
 
 🤝 Contribuir
 Este proyecto es parte de un trabajo práctico académico. Si deseas contribuir:
