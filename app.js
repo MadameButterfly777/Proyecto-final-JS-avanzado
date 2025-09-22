@@ -81,6 +81,7 @@ window.deleteBook = async function (id) {
   }
 };
 
+
 // === Modal  y C del CRUD
 
 const modal      = document.getElementById('modal');
@@ -157,15 +158,17 @@ btnSave?.addEventListener('click', async () => {
     btnSave.disabled = false;
   }
 });
- 
-
-function editBook(id, data) {
+ function editBook(id, data) {
   return fetch(`${API_URL}/list/${id}`, {
     method: "PUT",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(data)
-  }).then(r => r.json());
+  }).then(r => {
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  });
 }
+
 
 // === Filtros  ===
 const $ = (id) => document.getElementById(id);
